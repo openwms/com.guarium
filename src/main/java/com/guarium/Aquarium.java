@@ -20,8 +20,6 @@
  */
 package com.guarium;
 
-import java.io.BufferedReader;
-
 import org.glassfish.embeddable.GlassFish;
 import org.glassfish.embeddable.GlassFishProperties;
 import org.glassfish.embeddable.GlassFishRuntime;
@@ -47,10 +45,14 @@ public class Aquarium {
             GlassFishProperties glassfishProperties = new GlassFishProperties();
             // glassfishProperties.setConfigFileURI(configFile.toURI());
             glassfishProperties.setConfigFileReadOnly(false);
+            // glassfishProperties.setPort("admin-listener", 4848);
+            glassfishProperties.setPort("http-listener", Integer.valueOf(System.getenv("PORT")));
+            // glassfishProperties.setPort("https-listener", 57632);
 
             GlassFish glassfish = glassfishRuntime.newGlassFish(glassfishProperties);
             glassfish.start();
-            new BufferedReader(new java.io.InputStreamReader(System.in)).readLine();
+            // new BufferedReader(new
+            // java.io.InputStreamReader(System.in)).readLine();
         } catch (Exception e) {
             e.printStackTrace();
         }
